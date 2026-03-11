@@ -2,6 +2,7 @@ using CleanArchitecture.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using CleanArchitecture.Application.Interfaces;
 using CleanArchitecture.Infrastructure.Repositories;
+using CleanArchitecture.Api.Middleware;
 
 namespace CleanArchitecture.Api
 {
@@ -33,7 +34,7 @@ namespace CleanArchitecture.Api
 
             app.UseAuthorization();
 
-
+            app.UseMiddleware<ExceptionMiddleware>();
             app.MapControllers();
 
             app.Run();
