@@ -11,15 +11,18 @@ namespace CleanArchitecture.Api.Controllers
     public class TasksController : ControllerBase
     {
         private readonly ITaskRepository _taskRepository;
-
-        public TasksController(ITaskRepository taskRepository)
+        private readonly ILogger<TasksController> _logger;
+        public TasksController(ITaskRepository taskRepository, ILogger<TasksController> logger)
         {
             _taskRepository = taskRepository;
+            _logger = logger;
         }
 
         [HttpGet]
         public async Task<ActionResult<List<TaskDto>>> GetAllTasks()
         {
+            _logger.LogInformation("Fetching all tasks.");
+
             var tasks = await _taskRepository.GetAllAsync();
 
             var result = tasks.Select(t => new TaskDto

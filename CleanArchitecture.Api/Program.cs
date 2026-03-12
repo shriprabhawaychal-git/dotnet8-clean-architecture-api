@@ -34,7 +34,9 @@ namespace CleanArchitecture.Api
 
             app.UseAuthorization();
 
+            app.UseMiddleware<RequestLoggingMiddleware>();
             app.UseMiddleware<ExceptionMiddleware>();
+
             app.MapControllers();
 
             app.Run();
