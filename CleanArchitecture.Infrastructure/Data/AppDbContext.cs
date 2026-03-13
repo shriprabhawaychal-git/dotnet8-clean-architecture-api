@@ -11,5 +11,6 @@ namespace CleanArchitecture.Infrastructure.Data
         }
 
         public DbSet<TaskItem> Tasks { get; set; }
+        public DbSet<AppUser> Users { get; set; }
     }
 }
