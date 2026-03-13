@@ -19,11 +19,16 @@ namespace CleanArchitecture.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<TaskDto>>> GetAllTasks()
+        public async Task<ActionResult<List<TaskDto>>> GetAllTasks([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 5)
         {
-            _logger.LogInformation("Fetching all tasks.");
+            _logger.LogInformation("Fetching tasks for page {PageNumber} with page size {PageSize}.", pageNumber, pageSize);
 
-            var tasks = await _taskRepository.GetAllAsync();
+            if (pageNumber <= 0 || pageSize <= 0)
+            {
+                return BadRequest("Page number and page size must be greater than 0.");
+            }
+
+            var tasks = await _taskRepository.GetAllAsync(pageNumber, pageSize);
 
             var result = tasks.Select(t => new TaskDto
             {

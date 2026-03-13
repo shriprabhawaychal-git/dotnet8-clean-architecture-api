@@ -19,11 +19,13 @@ namespace CleanArchitecture.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<List<TaskItem>> GetAllAsync()
+        public async Task<List<TaskItem>> GetAllAsync(int pageNumber, int pageSize)
         {
             return await _context.Tasks
                 .AsNoTracking()
                 .OrderByDescending(t => t.CreatedDate)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
                 .ToListAsync();
         }
 

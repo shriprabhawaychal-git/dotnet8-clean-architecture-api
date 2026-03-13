@@ -1,15 +1,10 @@
 ﻿using CleanArchitecture.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CleanArchitecture.Application.Interfaces
 {
     public interface ITaskRepository
     {
-        Task<List<TaskItem>> GetAllAsync();
+        Task<List<TaskItem>> GetAllAsync(int pageNumber, int pageSize);
 
         Task<TaskItem?> GetByIdAsync(int id);
 
