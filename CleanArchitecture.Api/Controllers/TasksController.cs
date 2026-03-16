@@ -4,6 +4,7 @@ using CleanArchitecture.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CleanArchitecture.Api.Controllers
 {
@@ -106,6 +107,7 @@ namespace CleanArchitecture.Api.Controllers
             return NoContent();
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTask(int id)
         {
