@@ -96,8 +96,6 @@ Connection string used in `appsettings.json`:
   "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=CleanArchitectureDb;Trusted_Connection=True;TrustServerCertificate=True;"
 }
 
----
-
 ## Authentication Flow
 
 1. User registers with email and password
