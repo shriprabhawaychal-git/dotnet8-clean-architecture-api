@@ -95,3 +95,66 @@ Connection string used in `appsettings.json`:
 "ConnectionStrings": {
   "DefaultConnection": "Server=(localdb)\\mssqllocaldb;Database=CleanArchitectureDb;Trusted_Connection=True;TrustServerCertificate=True;"
 }
+
+---
+
+## Authentication Flow
+
+1. User registers with email and password
+2. Password is securely hashed using BCrypt
+3. User logs in using credentials
+4. API generates a JWT token
+5. Client sends JWT token in Authorization header
+6. Protected endpoints validate the token
+7. Role-based authorization controls access
+
+Example Authorization Header:
+
+Authorization: Bearer {your_jwt_token}
+
+---
+
+## API Endpoints
+
+### Authentication
+
+POST /api/auth/register  
+Register a new user
+
+POST /api/auth/login  
+Login and receive JWT token
+
+### Tasks
+
+GET /api/tasks  
+Get paginated list of tasks
+
+POST /api/tasks  
+Create new task
+
+PUT /api/tasks/{id}  
+Update task
+
+DELETE /api/tasks/{id}  
+Delete task (Admin only)
+
+---
+
+## Error Handling
+
+The API uses **Global Exception Middleware** to return standardized error responses.
+
+Example error response:
+
+{
+  "message": "An unexpected error occurred",
+  "details": "Error details"
+}
+
+Unauthorized request:
+
+HTTP 401 Unauthorized
+
+Forbidden request:
+
+HTTP 403 Forbidden
